@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Domain\Inventory\Interfaces;
+
+use App\Domain\Inventory\Models\Product;
+use App\Domain\Inventory\Models\StockMovement;
+use Illuminate\Database\Eloquent\Model;
+
+interface IInventoryRepository
+{
+    public function findProductById(int $id): ?Product;
+
+    public function createMovement(array $data): StockMovement;
+
+    public function updateProductStock(Product $product, int $quantity, string $operation): void;
+}

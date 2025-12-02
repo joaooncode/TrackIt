@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Domain\Inventory\Models;
 
-use App\Enums\MovementType;
+use App\Domain\Inventory\Enums\MovementType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

@@ -23,10 +23,12 @@ Route::prefix('v1')->name('v1.')->group(function () {
             ->name('inventory.')
             ->group(base_path('routes/v1/inventory.php'));
 
+        // -- MÓDULO CATEGORY --
 
-        // --- MÓDULO AUTH (Exemplo futuro) ---
-        // Route::prefix('auth')
-        //     ->group(base_path('routes/api/v1/auth.php'));
-
+        Route::prefix('categories')
+            ->name('categories.')
+            ->group(base_path('routes/v1/category.php'));
     });
 });
+
+require __DIR__.'/auth.php';

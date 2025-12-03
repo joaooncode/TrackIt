@@ -4,6 +4,8 @@ namespace App\Domain\Inventory\Services;
 
 use App\Domain\Inventory\Interfaces\ICategoryRepository;
 use App\Domain\Inventory\Models\Category;
+use App\Domain\Shared\EntityNotFoundException;
+
 
 class CategoryService
 {
@@ -19,8 +21,24 @@ class CategoryService
         return $this->categoryRepository->createCategory($data);
     }
 
-    public  function findCategoryById(int $id): Category
+    /**
+     * @param integer $id
+     * @return Category
+     * @throws EntityNotFoundException
+     */
+    public function findCategoryById(int $id): Category
     {
-        return $this->categoryRepository->findCategoryById($id);
+        $category = $this->categoryRepository->findCategoryById($id);
+
+        if (!$category) {
+            throw new EntityNotFoundException('Categoria', $id);
+        }
+
+        return $category;
+    }
+
+    public function getAllCategories(): array
+    {
+        return $this->categoryRepository->getAllCategories();
     }
 }

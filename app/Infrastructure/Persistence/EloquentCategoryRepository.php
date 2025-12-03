@@ -18,4 +18,9 @@ class EloquentCategoryRepository implements ICategoryRepository
     {
         return Category::find($id);
     }
+
+    public function getAllCategories(): array
+    {
+        return Category::all();
+    }
 }

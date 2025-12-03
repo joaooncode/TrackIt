@@ -7,4 +7,6 @@ interface ICategoryRepository
     public function createCategory(array $category): Category;
 
     public function findCategoryById(int $id): ?Category;
+
+    public function getAllCategories(): array;
 }

@@ -6,6 +6,7 @@ use App\Domain\Inventory\Enums\MovementType;
 use App\Domain\Inventory\Exceptions\InsufficientStockException;
 use App\Domain\Inventory\Interfaces\IInventoryRepository;
 use App\Domain\Inventory\Models\StockMovement;
+use App\Domain\Shared\EntityNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -19,19 +20,22 @@ class InventoryService
     }
 
     /**
+     * Cria uma nova movimentação de estoque
+     *
      * @param int $productId
      * @param int $quantity
      * @param MovementType $type
      * @param string $reason
      * @return StockMovement
      * @throws InsufficientStockException
+     * @throws EntityNotFoundException
      */
     public function registerMovement(int $productId, int $quantity, MovementType $type, string $reason): StockMovement
     {
         $product = $this->repository->findProductById($productId);
 
         if (!$product) {
-            throw new \Exception('Produto não encontrado.');
+            throw new EntityNotFoundException('Produto', $productId);
         }
 
         if ($type === MovementType::EXIT &&  !$product->hasSufficentStock($quantity)){

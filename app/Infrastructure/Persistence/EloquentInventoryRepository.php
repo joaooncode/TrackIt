@@ -11,7 +11,7 @@ class EloquentInventoryRepository implements IInventoryRepository
 
     public function findProductById(int $id): ?Product
     {
-       return Product::find($id);
+        return Product::find($id);
     }
 
     public function createMovement(array $data): StockMovement
@@ -21,9 +21,9 @@ class EloquentInventoryRepository implements IInventoryRepository
 
     public function updateProductStock(Product $product, int $quantity, string $operation): void
     {
-        if ($operation === 'incremente'){
+        if ($operation === 'incremente') {
             $product->increment('stock_quantity', $quantity);
-        } elseif ($operation === 'decremente'){
+        } elseif ($operation === 'decremente') {
             $product->decrement('stock_quantity', $quantity);
         }
     }

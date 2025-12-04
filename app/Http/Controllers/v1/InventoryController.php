@@ -8,6 +8,7 @@ use App\Domain\Inventory\Services\InventoryService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\CreateStockMovementRequest;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -98,5 +99,10 @@ class InventoryController extends Controller
             'message' => "Produto " . $product->name . " registrado com sucesso!",
             'data' => $product
         ], 201);
+    }
+
+    public function findProductById(int $id): ProductResource
+    {
+        return new ProductResource($this->service->findProductById($id));
     }
 }

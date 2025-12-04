@@ -24,5 +24,5 @@ Route::controller(InventoryController::class)->group(function () {
 
     // Produtos
     Route::post('/product/create', 'createProduct')->name('product.createProduct');
-
+    Route::get('/product/{id}', 'findProductById')->name('product.findProductById');
 });

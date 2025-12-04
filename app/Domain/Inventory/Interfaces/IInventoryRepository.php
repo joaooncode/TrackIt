@@ -12,6 +12,6 @@ interface IInventoryRepository
     public function createMovement(array $data): StockMovement;
 
     public function updateProductStock(Product $product, int $quantity, string $operation): void;
-    
+
     public function createProduct(array $data): Product;
 }

@@ -5,7 +5,7 @@ namespace App\Domain\Inventory\Services;
 use App\Domain\Inventory\Interfaces\ICategoryRepository;
 use App\Domain\Inventory\Models\Category;
 use App\Domain\Shared\EntityNotFoundException;
-use App\Http\Resources\CateogryCollection;
+use App\Http\Resources\CategoryCollection;
 
 
 class CategoryService
@@ -38,7 +38,7 @@ class CategoryService
         return $category;
     }
 
-    public function getAllCategories(): CateogryCollection
+    public function getAllCategories(): CategoryCollection
     {
         return $this->categoryRepository->getAllCategories();
     }

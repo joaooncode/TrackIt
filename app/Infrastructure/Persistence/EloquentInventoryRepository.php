@@ -9,9 +9,9 @@ use App\Domain\Inventory\Models\StockMovement;
 class EloquentInventoryRepository implements IInventoryRepository
 {
 
-    public function findProductById(int $id): ?Product
+    public function findProductById(int $id): Product
     {
-        return Product::find($id);
+        return Product::with('category')->find($id);
     }
 
     public function createMovement(array $data): StockMovement

@@ -30,6 +30,7 @@ class InventoryService
      * @return StockMovement
      * @throws InsufficientStockException
      * @throws EntityNotFoundException
+     * @throws \Throwable
      */
     public function registerMovement(int $productId, int $quantity, MovementType $type, string $reason): StockMovement
     {
@@ -60,8 +61,16 @@ class InventoryService
 
     }
 
+    // Produtos
     public function createProduct(array $data): Product
     {
         return $this->repository->createProduct($data);
     }
+
+    public function findProductById(int $id): Product
+    {
+        return $this->repository->findProductById($id);
+    }
+
+
 }

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Domain\Inventory\Interfaces;
+
 use App\Domain\Inventory\Models\Category;
-use App\Http\Resources\CateogryCollection;
+use App\Http\Resources\CategoryCollection;
 
 interface ICategoryRepository
 {
@@ -10,5 +11,5 @@ interface ICategoryRepository
 
     public function findCategoryById(int $id): ?Category;
 
-    public function getAllCategories(): CateogryCollection;
+    public function getAllCategories(): CategoryCollection;
 }

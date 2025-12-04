@@ -3,11 +3,15 @@
 namespace App\Domain\Inventory\Models;
 
 use App\Domain\Inventory\Enums\MovementType;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StockMovement extends Model
 {
+
+    use HasUuids;
+
     protected $fillable = [
         'product_id',
         'user_id',

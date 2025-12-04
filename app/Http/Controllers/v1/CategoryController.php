@@ -41,11 +41,11 @@ class CategoryController extends Controller
     /**
      * Retorna uma categoria por ID
      *
-     * @param integer $id
+     * @param string $id
      * @return  CategoryResource
      * @throws EntityNotFoundException
      */
-    public function show(int $id): CategoryResource
+    public function show(string $id): CategoryResource
     {
         return new CategoryResource($this->service->findCategoryById($id));
     }

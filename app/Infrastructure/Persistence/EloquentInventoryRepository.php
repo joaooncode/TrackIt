@@ -9,7 +9,7 @@ use App\Domain\Inventory\Models\StockMovement;
 class EloquentInventoryRepository implements IInventoryRepository
 {
 
-    public function findProductById(int $id): Product
+    public function findProductById(string $id): Product
     {
         return Product::with('category')->find($id);
     }

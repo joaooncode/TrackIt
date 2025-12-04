@@ -101,7 +101,7 @@ class InventoryController extends Controller
         ], 201);
     }
 
-    public function findProductById(int $id): ProductResource
+    public function findProductById(string $id): ProductResource
     {
         return new ProductResource($this->service->findProductById($id));
     }

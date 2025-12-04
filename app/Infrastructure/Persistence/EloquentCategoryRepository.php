@@ -15,7 +15,7 @@ class EloquentCategoryRepository implements ICategoryRepository
         return Category::create($category);
     }
 
-    public function findCategoryById(int $id): ?Category
+    public function findCategoryById(string $id): ?Category
     {
         return Category::find($id);
     }

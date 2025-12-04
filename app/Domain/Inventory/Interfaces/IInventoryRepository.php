@@ -7,7 +7,7 @@ use App\Domain\Inventory\Models\StockMovement;
 
 interface IInventoryRepository
 {
-    public function findProductById(int $id): ?Product;
+    public function findProductById(string $id): ?Product;
 
     public function createMovement(array $data): StockMovement;
 

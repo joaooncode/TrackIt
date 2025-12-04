@@ -23,11 +23,11 @@ class CategoryService
     }
 
     /**
-     * @param integer $id
+     * @param string $id
      * @return Category
      * @throws EntityNotFoundException
      */
-    public function findCategoryById(int $id): Category
+    public function findCategoryById(string $id): Category
     {
         $category = $this->categoryRepository->findCategoryById($id);
 

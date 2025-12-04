@@ -32,7 +32,7 @@ class InventoryService
      * @throws EntityNotFoundException
      * @throws \Throwable
      */
-    public function registerMovement(int $productId, int $quantity, MovementType $type, string $reason): StockMovement
+    public function registerMovement(string $productId, int $quantity, MovementType $type, string $reason): StockMovement
     {
         $product = $this->repository->findProductById($productId);
 
@@ -67,7 +67,7 @@ class InventoryService
         return $this->repository->createProduct($data);
     }
 
-    public function findProductById(int $id): Product
+    public function findProductById(string $id): Product
     {
         return $this->repository->findProductById($id);
     }

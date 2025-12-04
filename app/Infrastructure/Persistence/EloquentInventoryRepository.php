@@ -27,4 +27,9 @@ class EloquentInventoryRepository implements IInventoryRepository
             $product->decrement('stock_quantity', $quantity);
         }
     }
+
+    public function createProduct(array $data): Product
+    {
+        return Product::create($data);
+    }
 }

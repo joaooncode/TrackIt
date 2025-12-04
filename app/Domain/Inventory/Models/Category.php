@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    protected   $table = 'categories';
-    protected   $fillable = ['name', 'description'];
+    protected $table = 'categories';
+    protected $fillable = ['name', 'description'];
 
-    protected   $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function products(): HasMany
     {

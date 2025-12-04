@@ -22,7 +22,7 @@ Route::controller(InventoryController::class)->group(function () {
     // Nome final: v1.inventory.movements.store
     Route::post('/movements', 'store')->name('movements.store');
 
-    // Se quiser adicionar produtos no futuro, pode por aqui também
-    // ou criar um products.php separado se o arquivo ficar grande.
-    // Route::get('/products', 'index')->name('products.index');
+    // Produtos
+    Route::post('/product/create', 'createProduct')->name('product.createProduct');
+
 });

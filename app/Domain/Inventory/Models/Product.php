@@ -27,6 +27,11 @@ class Product extends Model
         'price' => 'integer',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -37,7 +42,7 @@ class Product extends Model
         return $this->hasMany(StockMovement::class);
     }
 
-    public function  hasSufficentStock(int $quantity): bool
+    public function hasSufficentStock(int $quantity): bool
     {
         return $this->stock_quantity >= $quantity;
     }

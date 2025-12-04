@@ -8,7 +8,7 @@ use App\Infrastructure\Persistence\EloquentCategoryRepository;
 use App\Infrastructure\Persistence\EloquentInventoryRepository;
 use Carbon\Laravel\ServiceProvider;
 
-class RepositoryServiceProvider extends  ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider
 {
     public function register(): void
     {

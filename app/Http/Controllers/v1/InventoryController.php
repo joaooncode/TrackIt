@@ -6,6 +6,7 @@ use App\Domain\Inventory\Enums\MovementType;
 use App\Domain\Inventory\Exceptions\InsufficientStockException;
 use App\Domain\Inventory\Services\InventoryService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\CreateStockMovementRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class InventoryController extends Controller
     /**
      * Criar nova movimentação de estoque
      *
-     * @param  CreateStockMovementRequest $request
+     * @param CreateStockMovementRequest $request
      * @return  JsonResponse
      * @throws InsufficientStockException
      */
@@ -77,5 +78,25 @@ class InventoryController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Novo produto
+     *
+     * Cria um novo registro de produto no banco de dados.
+     *
+     * @param CreateProductRequest $request
+     * @return JsonResponse
+     */
+    public function createProduct(CreateProductRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $product = $this->service->createProduct($validated);
+
+        return response()->json([
+            'message' => "Produto " . $product->name . " registrado com sucesso!",
+            'data' => $product
+        ], 201);
     }
 }

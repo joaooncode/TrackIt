@@ -5,6 +5,7 @@ namespace App\Domain\Inventory\Services;
 use App\Domain\Inventory\Enums\MovementType;
 use App\Domain\Inventory\Exceptions\InsufficientStockException;
 use App\Domain\Inventory\Interfaces\IInventoryRepository;
+use App\Domain\Inventory\Models\Product;
 use App\Domain\Inventory\Models\StockMovement;
 use App\Domain\Shared\EntityNotFoundException;
 use Illuminate\Support\Facades\Auth;
@@ -38,14 +39,14 @@ class InventoryService
             throw new EntityNotFoundException('Produto', $productId);
         }
 
-        if ($type === MovementType::EXIT &&  !$product->hasSufficentStock($quantity)){
+        if ($type === MovementType::EXIT && !$product->hasSufficentStock($quantity)) {
             throw new InsufficientStockException();
         }
 
         return DB::transaction(function () use ($product, $quantity, $type, $reason) {
             $movement = $this->repository->createMovement([
                 'product_id' => $product->id,
-                'user_id' =>Auth::id(),
+                'user_id' => Auth::id(),
                 'type' => $type,
                 'quantity' => $quantity,
                 'reason' => $reason
@@ -57,5 +58,10 @@ class InventoryService
             return $movement;
         });
 
+    }
+
+    public function createProduct(array $data): Product
+    {
+        return $this->repository->createProduct($data);
     }
 }

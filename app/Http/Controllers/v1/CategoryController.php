@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\v1;
 
-use App\Domain\Inventory\Models\Category;
 use App\Domain\Inventory\Services\CategoryService;
 use App\Domain\Shared\EntityNotFoundException;
 use App\Http\Controllers\Controller;
@@ -34,7 +33,7 @@ class CategoryController extends Controller
         $category = $this->service->createCategory($validated);
 
         return response()->json([
-            'message' => 'Categoria cadastrada com sucesso.',
+            'message' => "Categoria " . $category->name . " registrada com sucesso!",
             'data' => $category
         ], 201);
     }

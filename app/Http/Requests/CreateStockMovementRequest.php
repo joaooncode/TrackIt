@@ -14,7 +14,7 @@ class CreateStockMovementRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return \Auth::check();
     }
 
     /**
@@ -31,6 +31,7 @@ class CreateStockMovementRequest extends FormRequest
             'reason' => 'nullable|string|max:255',
         ];
     }
+
     public function messages(): array
     {
         return [

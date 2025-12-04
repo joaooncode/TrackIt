@@ -4,8 +4,10 @@ namespace App\Http\Controllers\v1;
 
 use App\Domain\Inventory\Models\Category;
 use App\Domain\Inventory\Services\CategoryService;
+use App\Domain\Shared\EntityNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
@@ -20,7 +22,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-        //TODO: Implementar CategoryCollection e CategoryResource
+        $categories = $this->service->getAllCategories();
+
+        return $categories;
     }
 
     public function store(StoreCategoryRequest $request): JsonResponse
@@ -35,9 +39,15 @@ class CategoryController extends Controller
         ], 201);
     }
 
-    public function show(int $id): Category
+    /**
+     * Retorna uma categoria por ID
+     *
+     * @param integer $id
+     * @return  CategoryResource
+     * @throws EntityNotFoundException
+     */
+    public function show(int $id): CategoryResource
     {
-        return $this->service->findCategoryById($id);
-
+        return new CategoryResource($this->service->findCategoryById($id));
     }
 }

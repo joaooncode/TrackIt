@@ -4,6 +4,7 @@ namespace App\Infrastructure\Persistence;
 
 use App\Domain\Inventory\Interfaces\ICategoryRepository;
 use App\Domain\Inventory\Models\Category;
+use App\Http\Resources\CateogryCollection;
 
 
 class EloquentCategoryRepository implements ICategoryRepository
@@ -19,8 +20,12 @@ class EloquentCategoryRepository implements ICategoryRepository
         return Category::find($id);
     }
 
-    public function getAllCategories(): array
+    public function getAllCategories(): CateogryCollection
     {
-        return Category::all();
+        $categories = Category::orderBy('name')->paginate();
+
+        return new CateogryCollection($categories);
     }
+
+
 }

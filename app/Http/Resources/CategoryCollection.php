@@ -22,7 +22,7 @@ class CategoryCollection extends ResourceCollection
             'links' => [
                 'self' => 'link',
             ],
-            'total_categories' => count($this->collection),
+            'totalCategories' => count($this->collection),
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Domain\Inventory\Interfaces\IInventoryRepository;
 use App\Domain\Inventory\Models\Product;
 use App\Domain\Inventory\Models\StockMovement;
 use App\Domain\Shared\EntityNotFoundException;
+use App\Http\Resources\ProductCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,7 @@ class InventoryService
     /**
      * Cria uma nova movimentação de estoque
      *
-     * @param int $productId
+     * @param string $productId
      * @param int $quantity
      * @param MovementType $type
      * @param string $reason
@@ -67,9 +68,29 @@ class InventoryService
         return $this->repository->createProduct($data);
     }
 
-    public function findProductById(string $id): Product
+    /**
+     * @param string $id
+     * @return Product
+     * @throws EntityNotFoundException
+     */
+    public function findProductById(string $id): ?Product
     {
-        return $this->repository->findProductById($id);
+        $product = $this->repository->findProductById($id);
+
+        if (!$product) {
+            throw new EntityNotFoundException('Produto', $id);
+        }
+
+        return $product;
+    }
+
+    /**
+     * @return ProductCollection
+     */
+    public function getAllProducts(): ProductCollection
+
+    {
+        return $this->repository->getAllProducts();
     }
 
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\v1;
 use App\Domain\Inventory\Enums\MovementType;
 use App\Domain\Inventory\Exceptions\InsufficientStockException;
 use App\Domain\Inventory\Services\InventoryService;
+use App\Domain\Shared\EntityNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\CreateStockMovementRequest;
+use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -101,8 +103,20 @@ class InventoryController extends Controller
         ], 201);
     }
 
+    /**
+     * Retorna um produto por ID
+     *
+     * @param string $id
+     * @return ProductResource
+     * @throws EntityNotFoundException
+     */
     public function findProductById(string $id): ProductResource
     {
         return new ProductResource($this->service->findProductById($id));
+    }
+
+    public function getAllProducts(): ProductCollection
+    {
+        return new ProductCollection($this->service->getAllProducts());
     }
 }

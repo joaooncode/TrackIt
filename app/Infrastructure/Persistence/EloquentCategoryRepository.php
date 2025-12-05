@@ -26,6 +26,4 @@ class EloquentCategoryRepository implements ICategoryRepository
 
         return new CategoryCollection($categories);
     }
-
-
 }

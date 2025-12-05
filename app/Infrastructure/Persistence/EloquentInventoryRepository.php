@@ -5,11 +5,17 @@ namespace App\Infrastructure\Persistence;
 use App\Domain\Inventory\Interfaces\IInventoryRepository;
 use App\Domain\Inventory\Models\Product;
 use App\Domain\Inventory\Models\StockMovement;
+use App\Http\Resources\ProductCollection;
 
 class EloquentInventoryRepository implements IInventoryRepository
 {
 
-    public function findProductById(string $id): Product
+    public function createProduct(array $data): Product
+    {
+        return Product::create($data);
+    }
+
+    public function findProductById(string $id): ?Product
     {
         return Product::with('category')->find($id);
     }
@@ -21,15 +27,22 @@ class EloquentInventoryRepository implements IInventoryRepository
 
     public function updateProductStock(Product $product, int $quantity, string $operation): void
     {
-        if ($operation === 'incremente') {
+        if ($operation === 'increment') {
             $product->increment('stock_quantity', $quantity);
-        } elseif ($operation === 'decremente') {
+        } elseif ($operation === 'decrement') {
             $product->decrement('stock_quantity', $quantity);
         }
     }
 
-    public function createProduct(array $data): Product
+    /**
+     * Lista de produtos cadastrados no banco de dados.
+     *
+     * @return ProductCollection
+     */
+    public function getAllProducts(): ProductCollection
     {
-        return Product::create($data);
+        $products = Product::orderBy('name')->paginate();
+
+        return new ProductCollection($products);
     }
 }

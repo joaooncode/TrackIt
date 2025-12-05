@@ -22,14 +22,4 @@ Route::controller(InventoryController::class)->group(function () {
     // Nome final: v1.inventory.movements.store
     Route::post('/movements', 'store')
         ->name('movements.store');
-
-    // Produtos
-    Route::post('/product/create', 'createProduct')
-        ->name('product.createProduct');
-
-    Route::get('/product/{id}', 'findProductById')
-        ->name('product.findProductById');
-
-    Route::get('/product', 'getAllProducts')
-        ->name('product.getAllProducts');
 });

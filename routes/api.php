@@ -28,7 +28,14 @@ Route::prefix('v1')->name('v1.')->group(function () {
         Route::prefix('categories')
             ->name('categories.')
             ->group(base_path('routes/v1/category.php'));
+
+        
+        // -- MÓDULO PRODUCTS --
+
+        Route::prefix('products')
+            ->name('products.')
+            ->group(base_path('routes/v1/product.php'));
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

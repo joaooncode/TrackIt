@@ -29,11 +29,6 @@ class Product extends Model
         'price' => 'integer',
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -67,6 +62,7 @@ class Product extends Model
             'id' => $this->id,
             'name' => $this->name,
             'sku' => $this->sku,
+            'created_at' => $this->created_at->timestamp,
         ];
     }
 }

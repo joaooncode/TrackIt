@@ -45,4 +45,9 @@ class EloquentInventoryRepository implements IInventoryRepository
 
         return new ProductCollection($products);
     }
+
+    public function searchProducts(string $term, int $perPage = 15)
+    {
+        return Product::search($term)->paginate($perPage);
+    }
 }

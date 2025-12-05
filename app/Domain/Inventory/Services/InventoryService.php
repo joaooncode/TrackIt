@@ -9,6 +9,7 @@ use App\Domain\Inventory\Models\Product;
 use App\Domain\Inventory\Models\StockMovement;
 use App\Domain\Shared\EntityNotFoundException;
 use App\Http\Resources\ProductCollection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -87,11 +88,17 @@ class InventoryService
     /**
      * @return ProductCollection
      */
-    public function getAllProducts(): ProductCollection
+    public function getAllProducts(Request $request): ProductCollection
 
     {
-        return $this->repository->getAllProducts();
+        $query = $request->input('q');
+
+        if ($query) {
+            $products = $this->repository->searchProducts($query);
+        } else {
+            $products = $this->repository->getAllProducts();
+        }
+
+        return new ProductCollection($products);
     }
-
-
 }

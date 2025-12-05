@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
-    use SoftDeletes, HasUuids;
+    use SoftDeletes, HasUuids, Searchable;
 
     protected $fillable = [
         'category_id',
@@ -51,5 +52,21 @@ class Product extends Model
     public function isLowStock(): bool
     {
         return $this->stock_quantity <= $this->min_stock_level;
+    }
+
+    public function searchableAs(): string
+    {
+        return 'inventory_products_index';
+    }
+
+    public function toSearchableArray(): array
+    {
+        $this->loadMissing('category');
+
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'sku' => $this->sku,
+        ];
     }
 }

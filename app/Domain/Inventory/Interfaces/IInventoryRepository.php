@@ -18,4 +18,6 @@ interface IInventoryRepository
 
     public function getAllProducts(): ProductCollection;
 
+    public function searchProducts(string $term, int $perPage = 15);
+
 }

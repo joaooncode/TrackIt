@@ -115,8 +115,8 @@ class InventoryController extends Controller
         return new ProductResource($this->service->findProductById($id));
     }
 
-    public function getAllProducts(): ProductCollection
+    public function getAllProducts(Request $request): ProductCollection
     {
-        return new ProductCollection($this->service->getAllProducts());
+        return new ProductCollection($this->service->getAllProducts($request));
     }
 }
